@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function() {
-    $('#example').DataTable( {
+    $('#api-swagger').DataTable( {
         columnDefs: [ {
             targets: [ 0 ],
             orderData: [ 0, 1 ]
@@ -11,8 +11,8 @@ $(document).ready(function() {
             targets: [ 1 ],
             orderData: [ 1, 0 ]
         }, {
-            targets: [ 4 ],
-            orderData: [ 4, 0 ]
+            targets: [ 2 ],
+            orderData: [ 2, 0 ]
         } ]
     } );
 } );
