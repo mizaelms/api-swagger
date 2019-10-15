@@ -16,13 +16,26 @@
 </table>
 <div class="container ">
 <div class="jumbotron"><a class="btn btn-primary pull-right" data-toggle="modal" href="#myModal" id="modellink">Show Modal</a></div>
-<div class="modal-container"></div>
+<div class="modal-container">
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Sample Model Box - Header Area</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+          </div>
+          </div>
+          </div>
+</div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var url = "api-swagger/api-doc/acp-assistant-qa-s2i-1-9bt6v/index.html";
+		var url = "api-doc/adf-documentgenerator-dev-s2i-1-wrd5t/index.html";
 		jQuery('#modellink').click(function(e) {
-		    $('.modal-container').load(url,function(result){
+		    $('.modal-body').load(url,function(result){
 				$('#myModal').modal({show:true});
 			});
 		});
