@@ -1,45 +1,102 @@
-<!DOCTYPE html><html><head>
-<meta charset='UTF-8'><title>APIs GNP</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css'/>
-<link rel='stylesheet' type='text/css' href='https://www.gstatic.com/recaptcha/releases/Zy-zVXWdnDW6AUZkKlojAKGe/styles__ltr.css'/>
-<link rel='stylesheet' type='text/css' href='css/style.css'/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.js'></script><script type='text/javascript' src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script><script type='text/javascript' src='js/index.js'></script> <link rel='shortcut icon' href='https://storage.googleapis.com/static-portalcorporativo.gnp.com.mx/favicon.ico'> <link rel='icon' type='image/png' sizes='96x96' href='https://storage.googleapis.com/static-portalcorporativo.gnp.com.mx/images/favicon.png'> <!-- Styles --> <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'> <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet'> <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet'></head><body>
-<div class='nav-header'><div class='container'><nav class='row' id='main-nav'><!-- Desktop Zone --><div class='col xl2 l2 m6 s6 gnp-logo logos'><a href='/'><img class='fr-fic fr-dii' alt='logo-gnp' src='https://static-portalcorporativo-uat.gnp.com.mx/images/site/GNP%20CANCER.png' style='width: 125px; height: 40px;'></a></div><div class='col xl2 push-xl8 l2 push-l8 m6 s6 right-align logos'><img class='fr-fic fr-dii' alt='slogan' src='https://static-portalcorporativo.gnp.com.mx/images/site/logo_vivir_increible.svg'></div><div class='neoHeader'><ul><li id='Personas'><a href='index.html' >Openshift</a></li><li id='Empresas' class='active'><a href='cloud.html'>Cloud</a></li></ul></div></nav></div></div>
-<table id='api-swagger' class='display' style='width:100%'><thead><tr>
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>APIs GNP</title><link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css'/><link rel='stylesheet' type='text/css' href='https://www.gstatic.com/recaptcha/releases/Zy-zVXWdnDW6AUZkKlojAKGe/styles__ltr.css'/><link rel='stylesheet' type='text/css' href='css/style.css'/><script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.js'></script><script type='text/javascript' src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script><script type='text/javascript' src='js/index.js'></script> <link rel='shortcut icon' href='https://storage.googleapis.com/static-portalcorporativo.gnp.com.mx/favicon.ico'> <link rel='icon' type='image/png' sizes='96x96' href='https://storage.googleapis.com/static-portalcorporativo.gnp.com.mx/images/favicon.png'> <!-- Styles --> <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'> <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet'> <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet'></head><body>
+<div class='nav-header'><div class='container'><nav class='row' id='main-nav'><!-- Desktop Zone --><div class='col xl2 l2 m6 s6 gnp-logo logos'><a href='/'><img class='fr-fic fr-dii' alt='logo-gnp' src='https://static-portalcorporativo-uat.gnp.com.mx/images/site/GNP%20CANCER.png' style='width: 125px; height: 40px;'></a></div><div class='col xl2 push-xl8 l2 push-l8 m6 s6 right-align logos'><img class='fr-fic fr-dii' alt='slogan' src='https://static-portalcorporativo.gnp.com.mx/images/site/logo_vivir_increible.svg'></div><div class='neoHeader'><ul><li id='Personas'><a href='index.html' >Openshift</a></li><li id='Empresas' class='active'><a href='cloud.html'>Cloud</a></li></ul></div></nav></div></div><table id='api-swagger' class='display' style='width:100%'><thead><tr>
 <th>Proyecto</th><th>Microservicio</th><th>Editor</th><th>Descripci&oacute;n</th></tr></thead><tbody>
-<tr><td>Cloud</td><td><a href='api-doc/cotizador_gmm/index.html' target='_blank'>Cotizador GMM</a></td><td><a href='http://swagger-editor-matriz-pruebas-qa.oscp.gnp.com.mx/?url=cotizador_gmm.json' target='_blank'>cotizador_gmm.json</a></td><td></td></tr>
-</tbody>
-</table>
-<div class="container ">
-<div class="jumbotron"><a class="btn btn-primary pull-right" data-toggle="modal" href="#myModal" id="modellink">Show Modal</a></div>
-<div class="modal-container">
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Sample Model Box - Header Area</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-          </div>
-          </div>
-          </div>
-</div>
-</div>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var url = "api-doc/adf-documentgenerator-dev-s2i-1-wrd5t/index.html";
-		jQuery('#modellink').click(function(e) {
-		    $('.modal-body').load(url,function(result){
-				$('#myModal').modal({show:true});
-			});
-		});
-	});
-</script>
-</body>
-
+<tr><td>Cloud</td><td><a href='api-doc/api-1/index.html' target='_blank'>Api Documentation</a></td><td><a href='http://swagger-editor-matriz-pruebas-qa.oscp.gnp.com.mx/?url=api-1.json' target='_blank'>Api Documentation</a><div id='tags' style='display:none'>operationId|parsearInformaUsingPOST
+operationId|findByPrincipalAndAfterAndTypeUsingGET
+operationId|findByPrincipalAndAfterAndTypeUsingGET_1
+operationId|invokeUsingGET
+operationId|invokeUsingGET_1
+operationId|invokeUsingGET_2
+operationId|invokeUsingGET_3
+operationId|invokeUsingGET_4
+operationId|invokeUsingGET_5
+operationId|invokeUsingGET_6
+operationId|invokeUsingGET_7
+operationId|invokeUsingGET_14
+operationId|invokeUsingGET_15
+operationId|valueUsingGET
+operationId|errorUsingGET
+operationId|errorUsingHEAD
+operationId|errorUsingPOST
+operationId|errorUsingPUT
+operationId|errorUsingDELETE
+operationId|errorUsingOPTIONS
+operationId|errorUsingPATCH
+operationId|invokeUsingGET_16
+operationId|invokeUsingGET_17
+operationId|invokeUsingGET_18
+operationId|invokeUsingGET_19
+operationId|invokeUsingGET_8
+operationId|invokeUsingGET_9
+operationId|invokeUsingGET_20
+operationId|invokeUsingGET_21
+operationId|getUsingGET
+operationId|setUsingPOST
+operationId|invokeUsingGET_10
+operationId|invokeUsingGET_11
+operationId|invokeUsingGET_22
+operationId|invokeUsingGET_23
+operationId|valueUsingGET_1
+operationId|invokeUsingGET_12
+operationId|invokeUsingGET_13 summary|parsearInforma
+summary|findByPrincipalAndAfterAndType
+summary|findByPrincipalAndAfterAndType
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|value
+summary|error
+summary|error
+summary|error
+summary|error
+summary|error
+summary|error
+summary|error
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|get
+summary|set
+summary|invoke
+summary|invoke
+summary|invoke
+summary|invoke
+summary|value
+summary|invoke
+summary|invoke</div></td><td></td></tr>
+<tr><td>Cloud</td><td><a href='api-doc/api-2/index.html' target='_blank'>Api Documentation</a></td><td><a href='http://swagger-editor-matriz-pruebas-qa.oscp.gnp.com.mx/?url=api-2.json' target='_blank'>Api Documentation</a><div id='tags' style='display:none'>operationId|errorUsingGET
+operationId|errorUsingHEAD
+operationId|errorUsingPOST
+operationId|errorUsingPUT
+operationId|errorUsingDELETE
+operationId|errorUsingOPTIONS
+operationId|errorUsingPATCH
+operationId|generarFolioUsingGET
+operationId|generarFolioUsingGET_1
+operationId|generarFolioPTUsingGET
+operationId|generarFolioPTUsingGET_1
+operationId|truncarTablaUsingGET summary|error
+summary|error
+summary|error
+summary|error
+summary|error
+summary|error
+summary|error
+summary|generarFolio
+summary|generarFolio
+summary|generarFolioPT
+summary|generarFolioPT
+summary|truncarTabla</div></td><td></td></tr>
+<tr><td>Cloud</td><td><a href='api-doc/api-3/index.html' target='_blank'>Aplicación java cotizador gmm</a></td><td><a href='http://swagger-editor-matriz-pruebas-qa.oscp.gnp.com.mx/?url=api-3.json' target='_blank'>Aplicación java cotizador gmm</a><div id='tags' style='display:none'>operationId|generarCotizacionUsingPOST summary|generarCotizacion</div></td><td></td></tr>
