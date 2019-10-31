@@ -719,16 +719,57 @@ margin-bottom: 20px;
     "banRiesgoSelecto" : {
       "type" : "boolean"
     },
+    "coberturas" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Coberturas"
+      }
+    },
+    "codigoPostal" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
     "cp" : {
       "type" : "string"
     },
+    "derechoPoliza" : {
+      "type" : "number",
+      "format" : "double"
+    },
     "edad" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "fechaAntiguedadGnp" : {
+      "type" : "string"
+    },
+    "genero" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "idAsegurado" : {
       "type" : "integer",
       "format" : "int32"
     },
     "idPersona" : {
       "type" : "integer",
       "format" : "int32"
+    },
+    "iva" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "primaBase" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "primaTotal" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "recargoPagoFraccionado" : {
+      "type" : "number",
+      "format" : "double"
     },
     "sexo" : {
       "type" : "integer",
@@ -747,9 +788,25 @@ margin-bottom: 20px;
     "idFactor" : {
       "type" : "integer",
       "format" : "int32"
+    },
+    "nombreCobertura" : {
+      "type" : "string"
+    },
+    "primaCobertura" : {
+      "type" : "number",
+      "format" : "double"
     }
   },
   "title" : "Coberturas"
+};
+        defs["Contratante"] = {
+  "type" : "object",
+  "properties" : {
+    "cpContratante" : {
+      "type" : "string"
+    }
+  },
+  "title" : "Contratante"
 };
         defs["CotizacionGMMRequest"] = {
   "type" : "object",
@@ -766,17 +823,14 @@ margin-bottom: 20px;
     "banContratanteDifTitular" : {
       "type" : "boolean"
     },
-    "banSolidezFamiliar" : {
-      "type" : "boolean"
-    },
     "coberturas" : {
       "type" : "array",
       "items" : {
         "$ref" : "#/definitions/Coberturas"
       }
     },
-    "cpContratante" : {
-      "type" : "string"
+    "contratante" : {
+      "$ref" : "#/definitions/Contratante"
     },
     "fechaFin" : {
       "type" : "string"
@@ -787,6 +841,121 @@ margin-bottom: 20px;
     "idAplicacion" : {
       "type" : "integer",
       "format" : "int32"
+    },
+    "idPlan" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "planes" : {
+      "$ref" : "#/definitions/Planes"
+    },
+    "titular" : {
+      "$ref" : "#/definitions/Titular"
+    }
+  },
+  "title" : "CotizacionGMMRequest"
+};
+        defs["CotizadorRequestSchema"] = {
+  "type" : "object",
+  "properties" : {
+    "cotizacionGMMRequest" : {
+      "$ref" : "#/definitions/CotizacionGMMRequest"
+    }
+  },
+  "title" : "CotizadorRequestSchema"
+};
+        defs["CotizadorResponseSchema"] = {
+  "type" : "object",
+  "properties" : {
+    "motorDinamicoResponse" : {
+      "$ref" : "#/definitions/MotorDinamicoResponse"
+    },
+    "resumenCotizacion" : {
+      "$ref" : "#/definitions/ResumenCotizacion"
+    }
+  },
+  "title" : "CotizadorResponseSchema"
+};
+        defs["DetalleFormaPago"] = {
+  "type" : "object",
+  "properties" : {
+    "asegurados" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Asegurados"
+      }
+    },
+    "derechoPoliza" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "iva" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "primaBase" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "primaTotal" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "recargoPagoFraccionado" : {
+      "type" : "number",
+      "format" : "double"
+    }
+  },
+  "title" : "DetalleFormaPago"
+};
+        defs["Elementos"] = {
+  "type" : "object",
+  "properties" : {
+    "descElemento" : {
+      "type" : "string"
+    },
+    "etiquetaElemento" : {
+      "type" : "string"
+    }
+  },
+  "title" : "Elementos"
+};
+        defs["FormasPago"] = {
+  "type" : "object",
+  "properties" : {
+    "formaPago" : {
+      "type" : "string"
+    },
+    "parcialidades" : {
+      "type" : "string"
+    },
+    "primaTotal" : {
+      "type" : "number",
+      "format" : "double"
+    }
+  },
+  "title" : "FormasPago"
+};
+        defs["MotorDinamicoResponse"] = {
+  "type" : "object",
+  "properties" : {
+    "formasPago" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/FormasPago"
+      }
+    },
+    "versionMotor" : {
+      "type" : "string"
+    }
+  },
+  "title" : "MotorDinamicoResponse"
+};
+        defs["Planes"] = {
+  "type" : "object",
+  "properties" : {
+    "banSolidezFamiliar" : {
+      "type" : "boolean"
     },
     "idCirculoMedico" : {
       "type" : "integer",
@@ -804,10 +973,6 @@ margin-bottom: 20px;
       "type" : "integer",
       "format" : "int32"
     },
-    "idPlan" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "idSumaAsegurada" : {
       "type" : "integer",
       "format" : "int32"
@@ -815,21 +980,42 @@ margin-bottom: 20px;
     "idTipoSumaAsegurada" : {
       "type" : "integer",
       "format" : "int32"
-    },
-    "titular" : {
-      "$ref" : "#/definitions/Titular"
     }
   },
-  "title" : "CotizacionGMMRequest"
+  "title" : "Planes"
 };
-        defs["CotizadorRequestSchema"] = {
+        defs["ResumenCotizacion"] = {
   "type" : "object",
   "properties" : {
-    "cotizacionGMMRequest" : {
-      "$ref" : "#/definitions/CotizacionGMMRequest"
+    "formasPago" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/FormasPago"
+      }
+    },
+    "secciones" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Secciones"
+      }
     }
   },
-  "title" : "CotizadorRequestSchema"
+  "title" : "ResumenCotizacion"
+};
+        defs["Secciones"] = {
+  "type" : "object",
+  "properties" : {
+    "elementos" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Elementos"
+      }
+    },
+    "seccion" : {
+      "type" : "string"
+    }
+  },
+  "title" : "Secciones"
 };
         defs["Titular"] = {
   "type" : "object",
@@ -846,6 +1032,9 @@ margin-bottom: 20px;
     "edad" : {
       "type" : "integer",
       "format" : "int32"
+    },
+    "fechaAntiguedadGnp" : {
+      "type" : "string"
     },
     "idPersona" : {
       "type" : "integer",
@@ -891,7 +1080,7 @@ margin-bottom: 20px;
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
-              <div class="app-desc">Version: 20191014-1319</div>
+              <div class="app-desc">Version: 20191031-1129</div>
             <hr>
             <div>Aplicación java cotizador gmm</div>
           </div>
@@ -949,7 +1138,7 @@ public class CotizadorControllerApiExample {
         CotizadorControllerApi apiInstance = new CotizadorControllerApi();
         CotizadorRequestSchema request = ; // CotizadorRequestSchema | request
         try {
-            'String' result = apiInstance.generarCotizacionUsingPOST(request);
+            CotizadorResponseSchema result = apiInstance.generarCotizacionUsingPOST(request);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CotizadorControllerApi#generarCotizacionUsingPOST");
@@ -968,7 +1157,7 @@ public class CotizadorControllerApiExample {
         CotizadorControllerApi apiInstance = new CotizadorControllerApi();
         CotizadorRequestSchema request = ; // CotizadorRequestSchema | request
         try {
-            'String' result = apiInstance.generarCotizacionUsingPOST(request);
+            CotizadorResponseSchema result = apiInstance.generarCotizacionUsingPOST(request);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CotizadorControllerApi#generarCotizacionUsingPOST");
@@ -988,7 +1177,7 @@ CotizadorControllerApi *apiInstance = [[CotizadorControllerApi alloc] init];
 
 // generarCotizacion
 [apiInstance generarCotizacionUsingPOSTWith:request
-              completionHandler: ^('String' output, NSError* error) {
+              completionHandler: ^(CotizadorResponseSchema output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1041,7 +1230,7 @@ namespace Example
             try
             {
                 // generarCotizacion
-                'String' result = apiInstance.generarCotizacionUsingPOST(request);
+                CotizadorResponseSchema result = apiInstance.generarCotizacionUsingPOST(request);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1174,7 +1363,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "OK",
   "schema" : {
-    "type" : "string"
+    "$ref" : "#/definitions/CotizadorResponseSchema"
   }
 };
                                         var schema = schemaWrapper.schema;
