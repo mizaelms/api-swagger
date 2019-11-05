@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Cotizador GMM</title>
+  <title>GNP AUTH</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -696,366 +696,137 @@ margin-bottom: 20px;
   <script>
     // Script section to load models into a JS Var
     var defs = {}
-        defs["AltaEspecialidad"] = {
+        defs["bodylogin"] = {
   "type" : "object",
+  "required" : [ "mail", "password", "projectid" ],
   "properties" : {
-    "idNivel" : {
-      "type" : "integer",
-      "format" : "int32"
+    "mail" : {
+      "type" : "string",
+      "description" : "Correo del usuario a autenticar"
     },
-    "idPlan" : {
-      "type" : "integer",
-      "format" : "int32"
+    "password" : {
+      "type" : "string",
+      "description" : "Contraseña del usuario"
+    },
+    "projectid" : {
+      "type" : "string",
+      "description" : "Project ID del cual firmar un token"
+    },
+    "mobile" : {
+      "type" : "string",
+      "description" : "Si está presente, se determina que el usuario viene de la aplicación móvil"
     }
-  },
-  "title" : "AltaEspecialidad"
+  }
 };
-        defs["Asegurados"] = {
+        defs["bodylogout"] = {
   "type" : "object",
+  "required" : [ "refreshtoken" ],
   "properties" : {
-    "coberturas" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Coberturas"
-      }
-    },
-    "codigoPostal" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "cp" : {
-      "type" : "string"
-    },
-    "derechoPoliza" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "edad" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "fechaAntiguedadGnp" : {
-      "type" : "string"
-    },
-    "genero" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idAsegurado" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idPersona" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "iva" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "primaBase" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "primaTotal" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "recargoPagoFraccionado" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "sexo" : {
-      "type" : "integer",
-      "format" : "int32"
+    "refreshtoken" : {
+      "type" : "string",
+      "description" : "Token de refresco JWT"
     }
-  },
-  "title" : "Asegurados"
+  }
 };
-        defs["Coberturas"] = {
+        defs["bodyrefreshlogin"] = {
   "type" : "object",
+  "required" : [ "refreshtoken" ],
   "properties" : {
-    "idCobertura" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idFactor" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "nombreCobertura" : {
-      "type" : "string"
-    },
-    "primaCobertura" : {
-      "type" : "number",
-      "format" : "double"
+    "refreshtoken" : {
+      "type" : "string",
+      "description" : "Token de refresco JWT"
     }
-  },
-  "title" : "Coberturas"
+  }
 };
-        defs["Contratante"] = {
+        defs["bodyuserinfo"] = {
   "type" : "object",
+  "required" : [ "mail" ],
   "properties" : {
-    "cpContratante" : {
-      "type" : "string"
+    "mail" : {
+      "type" : "string",
+      "description" : "Correo del usuario a localizar"
     }
-  },
-  "title" : "Contratante"
+  }
 };
-        defs["CotizacionGMMRequest"] = {
+        defs["responselogin"] = {
   "type" : "object",
+  "required" : [ "jwt", "refreshtoken" ],
   "properties" : {
-    "altaEspecialidad" : {
-      "$ref" : "#/definitions/AltaEspecialidad"
+    "jwt" : {
+      "type" : "string",
+      "description" : "Token JWT"
     },
-    "asegurados" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Asegurados"
-      }
+    "refreshtoken" : {
+      "type" : "string",
+      "description" : "Token de refresco JWT"
     },
-    "banContratanteDifTitular" : {
-      "type" : "boolean"
+    "lastlogin" : {
+      "type" : "string",
+      "description" : "Fecha y hora del ultimo login"
     },
-    "coberturas" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Coberturas"
-      }
+    "ip" : {
+      "type" : "string",
+      "description" : "Dirección IP de donde se realizó el último login"
     },
-    "contratante" : {
-      "$ref" : "#/definitions/Contratante"
+    "projectid" : {
+      "type" : "string",
+      "description" : "Project ID donde se hizo el último login"
     },
-    "descuentos" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Descuentos"
-      }
-    },
-    "fechaFin" : {
-      "type" : "string"
-    },
-    "fechaIni" : {
-      "type" : "string"
-    },
-    "idAplicacion" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idPlan" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "planes" : {
-      "$ref" : "#/definitions/Planes"
-    },
-    "titular" : {
-      "$ref" : "#/definitions/Titular"
+    "user_agent" : {
+      "type" : "string",
+      "description" : "User Agent con el que se realizó el último login"
     }
-  },
-  "title" : "CotizacionGMMRequest"
+  }
 };
-        defs["CotizadorRequestSchema"] = {
+        defs["responselogout"] = {
   "type" : "object",
+  "required" : [ "msg" ],
   "properties" : {
-    "cotizacionGMMRequest" : {
-      "$ref" : "#/definitions/CotizacionGMMRequest"
+    "msg" : {
+      "type" : "string",
+      "description" : "Token JWT"
     }
-  },
-  "title" : "CotizadorRequestSchema"
+  }
 };
-        defs["CotizadorResponseSchema"] = {
+        defs["responserefreshlogin"] = {
   "type" : "object",
+  "required" : [ "jwt", "refreshtoken" ],
   "properties" : {
-    "motorDinamicoResponse" : {
-      "$ref" : "#/definitions/MotorDinamicoResponse"
+    "jwt" : {
+      "type" : "string",
+      "description" : "Token JWT"
     },
-    "resumenCotizacion" : {
-      "$ref" : "#/definitions/ResumenCotizacion"
+    "refreshtoken" : {
+      "type" : "string",
+      "description" : "Token de refresco JWT"
+    },
+    "lastlogin" : {
+      "type" : "string",
+      "description" : "Fecha y hora del ultimo login"
+    },
+    "ip" : {
+      "type" : "string",
+      "description" : "Dirección IP de donde se realizó el último login"
+    },
+    "projectid" : {
+      "type" : "string",
+      "description" : "Project ID donde se hizo el último login"
+    },
+    "user_agent" : {
+      "type" : "string",
+      "description" : "User Agent con el que se realizó el último login"
     }
-  },
-  "title" : "CotizadorResponseSchema"
+  }
 };
-        defs["Descuentos"] = {
+        defs["responseuserinfo"] = {
   "type" : "object",
+  "required" : [ "name" ],
   "properties" : {
-    "banGarantiaCoaseguroCero" : {
-      "type" : "boolean"
-    },
-    "banRiesgoSelecto" : {
-      "type" : "boolean"
-    },
-    "idPersona" : {
-      "type" : "integer",
-      "format" : "int32"
+    "name" : {
+      "type" : "string",
+      "description" : "Nombre enmascarado del usuario"
     }
-  },
-  "title" : "Descuentos"
-};
-        defs["DetalleFormaPago"] = {
-  "type" : "object",
-  "properties" : {
-    "asegurados" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Asegurados"
-      }
-    },
-    "derechoPoliza" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "iva" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "primaBase" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "primaTotal" : {
-      "type" : "number",
-      "format" : "double"
-    },
-    "recargoPagoFraccionado" : {
-      "type" : "number",
-      "format" : "double"
-    }
-  },
-  "title" : "DetalleFormaPago"
-};
-        defs["Elementos"] = {
-  "type" : "object",
-  "properties" : {
-    "descElemento" : {
-      "type" : "string"
-    },
-    "etiquetaElemento" : {
-      "type" : "string"
-    }
-  },
-  "title" : "Elementos"
-};
-        defs["FormasPago"] = {
-  "type" : "object",
-  "properties" : {
-    "formaPago" : {
-      "type" : "string"
-    },
-    "parcialidades" : {
-      "type" : "string"
-    },
-    "primaTotal" : {
-      "type" : "number",
-      "format" : "double"
-    }
-  },
-  "title" : "FormasPago"
-};
-        defs["MotorDinamicoResponse"] = {
-  "type" : "object",
-  "properties" : {
-    "formasPago" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/FormasPago"
-      }
-    },
-    "versionMotor" : {
-      "type" : "string"
-    }
-  },
-  "title" : "MotorDinamicoResponse"
-};
-        defs["Planes"] = {
-  "type" : "object",
-  "properties" : {
-    "banSolidezFamiliar" : {
-      "type" : "boolean"
-    },
-    "idCirculoMedico" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idCoaseguro" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idDeducible" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idFormaPago" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idSumaAsegurada" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "idTipoSumaAsegurada" : {
-      "type" : "integer",
-      "format" : "int32"
-    }
-  },
-  "title" : "Planes"
-};
-        defs["ResumenCotizacion"] = {
-  "type" : "object",
-  "properties" : {
-    "formasPago" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/FormasPago"
-      }
-    },
-    "secciones" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Secciones"
-      }
-    }
-  },
-  "title" : "ResumenCotizacion"
-};
-        defs["Secciones"] = {
-  "type" : "object",
-  "properties" : {
-    "elementos" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/Elementos"
-      }
-    },
-    "seccion" : {
-      "type" : "string"
-    }
-  },
-  "title" : "Secciones"
-};
-        defs["Titular"] = {
-  "type" : "object",
-  "properties" : {
-    "cp" : {
-      "type" : "string"
-    },
-    "edad" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "fechaAntiguedadGnp" : {
-      "type" : "string"
-    },
-    "idPersona" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "sexo" : {
-      "type" : "integer",
-      "format" : "int32"
-    }
-  },
-  "title" : "Titular"
+  }
 };
   </script>
 
@@ -1073,9 +844,18 @@ margin-bottom: 20px;
             -->
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
-                  <li class="nav-header" data-group="CotizadorController"><a href="#api-CotizadorController">API Methods - CotizadorController</a></li>
-                    <li data-group="CotizadorController" data-name="generarCotizacionUsingPOST" class="">
-                      <a href="#api-CotizadorController-generarCotizacionUsingPOST">generarCotizacionUsingPOST</a>
+                  <li class="nav-header" data-group="GNPAUTH"><a href="#api-GNPAUTH">API Methods - GNPAUTH</a></li>
+                    <li data-group="GNPAUTH" data-name="login" class="">
+                      <a href="#api-GNPAUTH-login">login</a>
+                    </li>
+                    <li data-group="GNPAUTH" data-name="logout" class="">
+                      <a href="#api-GNPAUTH-logout">logout</a>
+                    </li>
+                    <li data-group="GNPAUTH" data-name="refreshLogin" class="">
+                      <a href="#api-GNPAUTH-refreshLogin">refreshLogin</a>
+                    </li>
+                    <li data-group="GNPAUTH" data-name="userinfo" class="">
+                      <a href="#api-GNPAUTH-userinfo">userinfo</a>
                     </li>
           </ul>
         </nav>
@@ -1083,26 +863,26 @@ margin-bottom: 20px;
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Cotizador GMM</h1>
+            <h1>GNP AUTH</h1>
           </div>
           <div class="clearfix"></div>
         </div>
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
-              <div class="app-desc">Version: 20191105-1556</div>
+              <div class="app-desc">Version: 1.0.0</div>
             <hr>
-            <div>Aplicación java cotizador gmm</div>
+            <div>GNP AUTH</div>
           </div>
         </div>
         <div id="sections">
-                <section id="api-CotizadorController">
-                  <h1>CotizadorController</h1>
-                    <div id="api-CotizadorController-generarCotizacionUsingPOST">
-                      <article id="api-CotizadorController-generarCotizacionUsingPOST-0" data-group="User" data-name="generarCotizacionUsingPOST" data-version="0">
+                <section id="api-GNPAUTH">
+                  <h1>GNPAUTH</h1>
+                    <div id="api-GNPAUTH-login">
+                      <article id="api-GNPAUTH-login-0" data-group="User" data-name="login" data-version="0">
                         <div class="pull-left">
-                          <h1>generarCotizacionUsingPOST</h1>
-                          <p>generarCotizacion</p>
+                          <h1>login</h1>
+                          <p>Inicia sesion con un correo, projectid y contraseña y devuelve un token de autenticación JWT para dicho proyecto</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1110,84 +890,84 @@ margin-bottom: 20px;
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/cotizador/generar-cotizacion</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/login</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-java">Java</a></li>
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-CotizadorController-generarCotizacionUsingPOST-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-GNPAUTH-login-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-login-0-java">Java</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-login-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-login-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-login-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-login-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-login-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-login-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-login-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-login-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-login-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-CotizadorController-generarCotizacionUsingPOST-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://35.232.57.52:8009/cotizador/generar-cotizacion"</code></pre>
+                          <div class="tab-pane active" id="examples-GNPAUTH-login-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://127.0.0.1:8080/login"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-java">
+                          <div class="tab-pane" id="examples-GNPAUTH-login-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.CotizadorControllerApi;
+import io.swagger.client.api.GNPAUTHApi;
 
 import java.io.File;
 import java.util.*;
 
-public class CotizadorControllerApiExample {
+public class GNPAUTHApiExample {
 
     public static void main(String[] args) {
         
-        CotizadorControllerApi apiInstance = new CotizadorControllerApi();
-        CotizadorRequestSchema request = ; // CotizadorRequestSchema | request
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodylogin body = ; // Bodylogin | 
         try {
-            CotizadorResponseSchema result = apiInstance.generarCotizacionUsingPOST(request);
+            responselogin result = apiInstance.login(body);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling CotizadorControllerApi#generarCotizacionUsingPOST");
+            System.err.println("Exception when calling GNPAUTHApi#login");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.CotizadorControllerApi;
+                          <div class="tab-pane" id="examples-GNPAUTH-login-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.GNPAUTHApi;
 
-public class CotizadorControllerApiExample {
+public class GNPAUTHApiExample {
 
     public static void main(String[] args) {
-        CotizadorControllerApi apiInstance = new CotizadorControllerApi();
-        CotizadorRequestSchema request = ; // CotizadorRequestSchema | request
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodylogin body = ; // Bodylogin | 
         try {
-            CotizadorResponseSchema result = apiInstance.generarCotizacionUsingPOST(request);
+            responselogin result = apiInstance.login(body);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling CotizadorControllerApi#generarCotizacionUsingPOST");
+            System.err.println("Exception when calling GNPAUTHApi#login");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-groovy">
+  <div class="tab-pane" id="examples-GNPAUTH-login-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">CotizadorRequestSchema *request = ; // request
+                            <div class="tab-pane" id="examples-GNPAUTH-login-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Bodylogin *body = ; // 
 
-CotizadorControllerApi *apiInstance = [[CotizadorControllerApi alloc] init];
+GNPAUTHApi *apiInstance = [[GNPAUTHApi alloc] init];
 
-// generarCotizacion
-[apiInstance generarCotizacionUsingPOSTWith:request
-              completionHandler: ^(CotizadorResponseSchema output, NSError* error) {
+// Inicia sesion con un correo, projectid y contraseña y devuelve un token de autenticación JWT para dicho proyecto
+[apiInstance loginWith:body
+              completionHandler: ^(responselogin output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1198,12 +978,12 @@ CotizadorControllerApi *apiInstance = [[CotizadorControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var CotizadorGmm = require('cotizador_gmm');
+                            <div class="tab-pane" id="examples-GNPAUTH-login-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GnpAuth = require('gnp_auth');
 
-var api = new CotizadorGmm.CotizadorControllerApi()
+var api = new GnpAuth.GNPAUTHApi()
 
-var request = ; // {CotizadorRequestSchema} request
+var body = ; // {Bodylogin} 
 
 
 var callback = function(error, data, response) {
@@ -1213,14 +993,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.generarCotizacionUsingPOST(request, callback);
+api.login(body, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-angular">
+                            <!--<div class="tab-pane" id="examples-GNPAUTH-login-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-csharp">
+                            <div class="tab-pane" id="examples-GNPAUTH-login-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -1229,23 +1009,23 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class generarCotizacionUsingPOSTExample
+    public class loginExample
     {
         public void main()
         {
             
-            var apiInstance = new CotizadorControllerApi();
-            var request = new CotizadorRequestSchema(); // CotizadorRequestSchema | request
+            var apiInstance = new GNPAUTHApi();
+            var body = new Bodylogin(); // Bodylogin | 
 
             try
             {
-                // generarCotizacion
-                CotizadorResponseSchema result = apiInstance.generarCotizacionUsingPOST(request);
+                // Inicia sesion con un correo, projectid y contraseña y devuelve un token de autenticación JWT para dicho proyecto
+                responselogin result = apiInstance.login(body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling CotizadorControllerApi.generarCotizacionUsingPOST: " + e.Message );
+                Debug.Print("Exception when calling GNPAUTHApi.login: " + e.Message );
             }
         }
     }
@@ -1253,40 +1033,40 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-php">
+                            <div class="tab-pane" id="examples-GNPAUTH-login-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\Api\CotizadorControllerApi();
-$request = ; // CotizadorRequestSchema | request
+$api_instance = new Swagger\Client\Api\GNPAUTHApi();
+$body = ; // Bodylogin | 
 
 try {
-    $result = $api_instance->generarCotizacionUsingPOST($request);
+    $result = $api_instance->login($body);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CotizadorControllerApi->generarCotizacionUsingPOST: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling GNPAUTHApi->login: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-perl">
+                            <div class="tab-pane" id="examples-GNPAUTH-login-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::CotizadorControllerApi;
+use WWW::SwaggerClient::GNPAUTHApi;
 
-my $api_instance = WWW::SwaggerClient::CotizadorControllerApi->new();
-my $request = WWW::SwaggerClient::Object::CotizadorRequestSchema->new(); # CotizadorRequestSchema | request
+my $api_instance = WWW::SwaggerClient::GNPAUTHApi->new();
+my $body = WWW::SwaggerClient::Object::Bodylogin->new(); # Bodylogin | 
 
 eval { 
-    my $result = $api_instance->generarCotizacionUsingPOST(request => $request);
+    my $result = $api_instance->login(body => $body);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling CotizadorControllerApi->generarCotizacionUsingPOST: $@\n";
+    warn "Exception when calling GNPAUTHApi->login: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-CotizadorController-generarCotizacionUsingPOST-0-python">
+                            <div class="tab-pane" id="examples-GNPAUTH-login-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -1294,15 +1074,15 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.CotizadorControllerApi()
-request =  # CotizadorRequestSchema | request
+api_instance = swagger_client.GNPAUTHApi()
+body =  # Bodylogin | 
 
 try: 
-    # generarCotizacion
-    api_response = api_instance.generar_cotizacion_using_post(request)
+    # Inicia sesion con un correo, projectid y contraseña y devuelve un token de autenticación JWT para dicho proyecto
+    api_response = api_instance.login(body)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CotizadorControllerApi->generarCotizacionUsingPOST: %s\n" % e)</code></pre>
+    print("Exception when calling GNPAUTHApi->login: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -1316,7 +1096,7 @@ except ApiException as e:
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">request <span style="color:red;">*</span></td>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
 <td>
 
 
@@ -1324,11 +1104,10 @@ except ApiException as e:
 $(document).ready(function() {
   var schemaWrapper = {
   "in" : "body",
-  "name" : "request",
-  "description" : "request",
+  "name" : "body",
   "required" : true,
   "schema" : {
-    "$ref" : "#/definitions/CotizadorRequestSchema"
+    "$ref" : "#/definitions/bodylogin"
   }
 };
   var schema = schemaWrapper.schema;
@@ -1342,12 +1121,12 @@ $(document).ready(function() {
   }
 
   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_generarCotizacionUsingPOST_request');
+  var result = $('#d2e199_login_body');
   result.empty();
   result.append(view.render());
 });
 </script>
-<div id="d2e199_generarCotizacionUsingPOST_request"></div>
+<div id="d2e199_login_body"></div>
 </td>
 </tr>
 
@@ -1356,24 +1135,24 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
+                            <h3> Status: 200 - Success </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-generarCotizacionUsingPOST-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-login-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-generarCotizacionUsingPOST-200-schema">
-                                  <div id='responses-generarCotizacionUsingPOST-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-login-200-schema">
+                                  <div id='responses-login-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "OK",
+  "description" : "Success",
   "schema" : {
-    "$ref" : "#/definitions/CotizadorResponseSchema"
+    "$ref" : "#/definitions/responselogin"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -1388,18 +1167,18 @@ $(document).ready(function() {
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-generarCotizacionUsingPOST-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-generarCotizacionUsingPOST-200-schema-200');
+                                        $('#responses-login-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-login-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-generarCotizacionUsingPOST-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-login-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
-                            <h3> Status: 201 - Created </h3>
+                            <h3> Status: 400 - Petición inválida </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -1407,7 +1186,7 @@ $(document).ready(function() {
                             <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
-                            <h3> Status: 401 - Unauthorized </h3>
+                            <h3> Status: 401 - Usuario no autorizado </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -1415,7 +1194,7 @@ $(document).ready(function() {
                             <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
-                            <h3> Status: 403 - Forbidden </h3>
+                            <h3> Status: 500 - Error interno </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -1423,7 +1202,980 @@ $(document).ready(function() {
                             <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
-                            <h3> Status: 404 - Not Found </h3>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-GNPAUTH-logout">
+                      <article id="api-GNPAUTH-logout-0" data-group="User" data-name="logout" data-version="0">
+                        <div class="pull-left">
+                          <h1>logout</h1>
+                          <p>Enviando un refreshtoken, se invalida el mismo, y finaliza la sesión</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/logout</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-GNPAUTH-logout-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-java">Java</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-logout-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-logout-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-logout-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-GNPAUTH-logout-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://127.0.0.1:8080/logout"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-GNPAUTH-logout-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.GNPAUTHApi;
+
+import java.io.File;
+import java.util.*;
+
+public class GNPAUTHApiExample {
+
+    public static void main(String[] args) {
+        
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodylogout body = ; // Bodylogout | 
+        try {
+            responselogout result = apiInstance.logout(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GNPAUTHApi#logout");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-GNPAUTH-logout-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.GNPAUTHApi;
+
+public class GNPAUTHApiExample {
+
+    public static void main(String[] args) {
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodylogout body = ; // Bodylogout | 
+        try {
+            responselogout result = apiInstance.logout(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GNPAUTHApi#logout");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-GNPAUTH-logout-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-GNPAUTH-logout-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Bodylogout *body = ; // 
+
+GNPAUTHApi *apiInstance = [[GNPAUTHApi alloc] init];
+
+// Enviando un refreshtoken, se invalida el mismo, y finaliza la sesión
+[apiInstance logoutWith:body
+              completionHandler: ^(responselogout output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-logout-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GnpAuth = require('gnp_auth');
+
+var api = new GnpAuth.GNPAUTHApi()
+
+var body = ; // {Bodylogout} 
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.logout(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-GNPAUTH-logout-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-GNPAUTH-logout-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class logoutExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new GNPAUTHApi();
+            var body = new Bodylogout(); // Bodylogout | 
+
+            try
+            {
+                // Enviando un refreshtoken, se invalida el mismo, y finaliza la sesión
+                responselogout result = apiInstance.logout(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling GNPAUTHApi.logout: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-logout-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\GNPAUTHApi();
+$body = ; // Bodylogout | 
+
+try {
+    $result = $api_instance->logout($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling GNPAUTHApi->logout: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-logout-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::GNPAUTHApi;
+
+my $api_instance = WWW::SwaggerClient::GNPAUTHApi->new();
+my $body = WWW::SwaggerClient::Object::Bodylogout->new(); # Bodylogout | 
+
+eval { 
+    my $result = $api_instance->logout(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling GNPAUTHApi->logout: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-logout-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.GNPAUTHApi()
+body =  # Bodylogout | 
+
+try: 
+    # Enviando un refreshtoken, se invalida el mismo, y finaliza la sesión
+    api_response = api_instance.logout(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling GNPAUTHApi->logout: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+<td>
+
+
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "in" : "body",
+  "name" : "body",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/bodylogout"
+  }
+};
+  var schema = schemaWrapper.schema;
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_logout_body');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_logout_body"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Success </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-logout-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-logout-200-schema">
+                                  <div id='responses-logout-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Success",
+  "schema" : {
+    "$ref" : "#/definitions/responselogout"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-logout-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-logout-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-logout-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Petición inválida </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 401 - Usuario no autorizado </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 500 - Error interno </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-GNPAUTH-refreshLogin">
+                      <article id="api-GNPAUTH-refreshLogin-0" data-group="User" data-name="refreshLogin" data-version="0">
+                        <div class="pull-left">
+                          <h1>refreshLogin</h1>
+                          <p>Inicia sesion con un token de refresco y devuelve un token de autenticación JWT</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/login/refresh</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-GNPAUTH-refreshLogin-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-java">Java</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-refreshLogin-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-refreshLogin-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-refreshLogin-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-GNPAUTH-refreshLogin-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://127.0.0.1:8080/login/refresh"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.GNPAUTHApi;
+
+import java.io.File;
+import java.util.*;
+
+public class GNPAUTHApiExample {
+
+    public static void main(String[] args) {
+        
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodyrefreshlogin body = ; // Bodyrefreshlogin | 
+        try {
+            responserefreshlogin result = apiInstance.refreshLogin(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GNPAUTHApi#refreshLogin");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.GNPAUTHApi;
+
+public class GNPAUTHApiExample {
+
+    public static void main(String[] args) {
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodyrefreshlogin body = ; // Bodyrefreshlogin | 
+        try {
+            responserefreshlogin result = apiInstance.refreshLogin(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GNPAUTHApi#refreshLogin");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Bodyrefreshlogin *body = ; // 
+
+GNPAUTHApi *apiInstance = [[GNPAUTHApi alloc] init];
+
+// Inicia sesion con un token de refresco y devuelve un token de autenticación JWT
+[apiInstance refreshLoginWith:body
+              completionHandler: ^(responserefreshlogin output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GnpAuth = require('gnp_auth');
+
+var api = new GnpAuth.GNPAUTHApi()
+
+var body = ; // {Bodyrefreshlogin} 
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.refreshLogin(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class refreshLoginExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new GNPAUTHApi();
+            var body = new Bodyrefreshlogin(); // Bodyrefreshlogin | 
+
+            try
+            {
+                // Inicia sesion con un token de refresco y devuelve un token de autenticación JWT
+                responserefreshlogin result = apiInstance.refreshLogin(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling GNPAUTHApi.refreshLogin: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\GNPAUTHApi();
+$body = ; // Bodyrefreshlogin | 
+
+try {
+    $result = $api_instance->refreshLogin($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling GNPAUTHApi->refreshLogin: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::GNPAUTHApi;
+
+my $api_instance = WWW::SwaggerClient::GNPAUTHApi->new();
+my $body = WWW::SwaggerClient::Object::Bodyrefreshlogin->new(); # Bodyrefreshlogin | 
+
+eval { 
+    my $result = $api_instance->refreshLogin(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling GNPAUTHApi->refreshLogin: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-refreshLogin-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.GNPAUTHApi()
+body =  # Bodyrefreshlogin | 
+
+try: 
+    # Inicia sesion con un token de refresco y devuelve un token de autenticación JWT
+    api_response = api_instance.refresh_login(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling GNPAUTHApi->refreshLogin: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+<td>
+
+
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "in" : "body",
+  "name" : "body",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/bodyrefreshlogin"
+  }
+};
+  var schema = schemaWrapper.schema;
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_refreshLogin_body');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_refreshLogin_body"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Success </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-refreshLogin-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-refreshLogin-200-schema">
+                                  <div id='responses-refreshLogin-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Success",
+  "schema" : {
+    "$ref" : "#/definitions/responserefreshlogin"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-refreshLogin-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-refreshLogin-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-refreshLogin-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Petición inválida </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 401 - Usuario no autorizado </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 500 - Error interno </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-GNPAUTH-userinfo">
+                      <article id="api-GNPAUTH-userinfo-0" data-group="User" data-name="userinfo" data-version="0">
+                        <div class="pull-left">
+                          <h1>userinfo</h1>
+                          <p>Verifica la existencia de un usuario y devuelve el nombre enmascarado por asteriscos</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/userinfo</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-GNPAUTH-userinfo-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-java">Java</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-userinfo-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-GNPAUTH-userinfo-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-GNPAUTH-userinfo-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-GNPAUTH-userinfo-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST "https://127.0.0.1:8080/userinfo"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.GNPAUTHApi;
+
+import java.io.File;
+import java.util.*;
+
+public class GNPAUTHApiExample {
+
+    public static void main(String[] args) {
+        
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodyuserinfo body = ; // Bodyuserinfo | 
+        try {
+            responseuserinfo result = apiInstance.userinfo(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GNPAUTHApi#userinfo");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.GNPAUTHApi;
+
+public class GNPAUTHApiExample {
+
+    public static void main(String[] args) {
+        GNPAUTHApi apiInstance = new GNPAUTHApi();
+        Bodyuserinfo body = ; // Bodyuserinfo | 
+        try {
+            responseuserinfo result = apiInstance.userinfo(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GNPAUTHApi#userinfo");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Bodyuserinfo *body = ; // 
+
+GNPAUTHApi *apiInstance = [[GNPAUTHApi alloc] init];
+
+// Verifica la existencia de un usuario y devuelve el nombre enmascarado por asteriscos
+[apiInstance userinfoWith:body
+              completionHandler: ^(responseuserinfo output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GnpAuth = require('gnp_auth');
+
+var api = new GnpAuth.GNPAUTHApi()
+
+var body = ; // {Bodyuserinfo} 
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.userinfo(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-GNPAUTH-userinfo-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class userinfoExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new GNPAUTHApi();
+            var body = new Bodyuserinfo(); // Bodyuserinfo | 
+
+            try
+            {
+                // Verifica la existencia de un usuario y devuelve el nombre enmascarado por asteriscos
+                responseuserinfo result = apiInstance.userinfo(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling GNPAUTHApi.userinfo: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\GNPAUTHApi();
+$body = ; // Bodyuserinfo | 
+
+try {
+    $result = $api_instance->userinfo($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling GNPAUTHApi->userinfo: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::GNPAUTHApi;
+
+my $api_instance = WWW::SwaggerClient::GNPAUTHApi->new();
+my $body = WWW::SwaggerClient::Object::Bodyuserinfo->new(); # Bodyuserinfo | 
+
+eval { 
+    my $result = $api_instance->userinfo(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling GNPAUTHApi->userinfo: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-GNPAUTH-userinfo-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.GNPAUTHApi()
+body =  # Bodyuserinfo | 
+
+try: 
+    # Verifica la existencia de un usuario y devuelve el nombre enmascarado por asteriscos
+    api_response = api_instance.userinfo(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling GNPAUTHApi->userinfo: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+<td>
+
+
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "in" : "body",
+  "name" : "body",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/bodyuserinfo"
+  }
+};
+  var schema = schemaWrapper.schema;
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_userinfo_body');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_userinfo_body"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Success </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-userinfo-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-userinfo-200-schema">
+                                  <div id='responses-userinfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Success",
+  "schema" : {
+    "$ref" : "#/definitions/responseuserinfo"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = defs;
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-userinfo-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-userinfo-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-userinfo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Petición inválida </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 401 - Usuario no autorizado </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 500 - Error interno </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -1439,11 +2191,11 @@ $(document).ready(function() {
           <div id="footer">
             <div id="api-_footer">
               <p>Suggestions, contact, support and error reporting;
-                  <div class="app-desc">Information URL: <a href="http://git.gnp.mx/EOT/COT/COT_MSV_CoreCotizador">http://git.gnp.mx/EOT/COT/COT_MSV_CoreCotizador</a></div>
+                  <div class="app-desc">Information URL: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
                   <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
               </p>
-                <div class="license-info">Apache License Version 2.0</div>
-                <div class="license-url">https://www.apache.org/licenses/LICENSE-2.0</div>
+                <div class="license-info">All rights reserved</div>
+                <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
             </div>
           </div>
       </div>
